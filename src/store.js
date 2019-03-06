@@ -9,11 +9,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    songs: []
+    songs: [],
+    activeSong: {}
   },
   mutations: {
     setResults(state, data) {
       state.songs = data
+    },
+    setActiveSong(state, data) {
+      state.activeSong = data
     }
   },
   actions: {
@@ -23,6 +27,11 @@ export default new Vuex.Store({
       $.getJSON(url + query).then(res => {
         commit('setResults', res.results)
       })
+    },
+    setActive({
+      commit
+    }, song) {
+      commit('setActiveSong', song)
     }
   }
 })
